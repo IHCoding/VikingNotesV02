@@ -346,6 +346,7 @@
     <Content Include="Views\Quizs\QuizForm.cshtml" />
     <Content Include="Views\Home\QuizIndex.cshtml" />
     <Content Include="Views\Quizs\MyQuiz.cshtml" />
+    <Content Include="Views\Quizs\_RatingControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

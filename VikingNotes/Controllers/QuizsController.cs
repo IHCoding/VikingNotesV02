@@ -24,20 +24,37 @@ namespace VikingNotes.Controllers
             _context = new ApplicationDbContext();
         }
 
+
+
+
         [Authorize]
-        public ActionResult SetRating(int QuizId, decimal rank)
+        public Rating SetRating(int quizId, decimal rank)
         {
             var rating = new Rating();
             rating.Rank = rank;
-            rating.Id = QuizId;
+            rating.Id = quizId;
             rating.UserId = User.Identity.GetUserId();
 
             _context.Ratings.Add(rating);
             _context.SaveChanges();
 
-            return RedirectToAction("QuizIndex", "Home", new { id = QuizId });
+
+            rating = _context.Ratings
+                .Include(x => x.Quiz)
+                .Include(x => x.Quiz.Ratings)
+                .Include(x => x.User)
+                .SingleOrDefault(x => x.RatingId == rating.RatingId);
+
+            return (rating);
+            //return RedirectToAction("QuizIndex", "Home", new { id = quizId });
         }
 
+
+        public PartialViewResult RatingControl(string quizId)
+        {
+            var viewModel = _context.Guizzes.Find(quizId);
+            return PartialView("_RatingControl", viewModel);;
+        }
 
 
 

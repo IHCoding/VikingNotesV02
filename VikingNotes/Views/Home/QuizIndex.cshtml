@@ -30,22 +30,91 @@
 </dt>
 
 
-<dd>
+<dd id="RatingsControl">
+    @{Html.RenderAction("RatingControl", "Quizs", new { id = Model.Id }); }
+</dd>
+
+
+@{
+    for (int i = 0; i < 10; i++)
+    {
+        <a href="#" name="Rank" data-rank="@i" data-quizId="@Model.Id">
+            <i class="glyphicon glyphicon-star@(Model.OverallRating < i ? "-empty" : "")"></i>
+        </a>
+    }
+}
+
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    
+    <script>
+        function SetRatingControlCallbacks(e) {
+            var rank = $("#RatingsControl a[name='Rank']");
+            rank.on('click', SetRating);
+        }
+
+        function SetRating(e) {
+
+            var quizId = $(this).data("quizId");
+            var rank = $(this).data("rank");
+
+            var data = { quizId: $(this).data("quizId"), rank: $(this).data("rank").data("rank") };
+            $.post("@Url.Action("SetRating", "Quizs")", data)
+                .done(function(response, status, jqxhr) {
+                    var url = "@Url.Action("RatingControl", "Quizs")";
+
+                    $("#RatingsControl").load(url,
+                        { quizId: data.quizId },
+                        function(responseText, statusText, xhr) {
+                            switch (statusText) {
+                            case "success":
+                                SetRatingControlCallbacks();
+                                break;
+                            default:
+                                break;
+                            }
+
+                            if (responseText.length == 0) {
+                            }
+                        });
+                })
+
+                .fail ( function (jqxhr, status, error) {
+                });
+
+        }
+
+        $(document).ready(SetRatingControlCallbacks);
+    </script>
+}
+
+
+
+
+
+
+
+
+
+@*<dd>*@
     <!-- does not recognize the @@model.Name is @@model.overallRating -->
     @*@{
-    if(Model.Ratings.count > 0){ <p> Overall Rating for @Model. is @Model.OverallRating</p>}
+    if(Model.Ratings.Count > 0){ <p> Overall Rating for @Model. is @Model.OverallRating</p>}
         else { <p>Rates for @Model.Name</p>}
     }*@
     
-        @{using (Html.BeginForm("SetRating", "Quizs"))
+        @*@{using (Html.BeginForm("SetRating", "Quizs"))*@
           {
                 @*@Html.HiddenFor(x =>x.Id)*@
-              for (int i = 0; i < 10; i++)
+              @*for (int i = 0; i < 10; i++)
               {
                   <input type="radio" id="Rank" name="Rank" value="@i"/>
                   @i
               }
-              <input type="submit" value="submit"/>
+              <input type="submit" value="submit"/>*@
           }
         }
-    </dd>
+    @*</dd>*@

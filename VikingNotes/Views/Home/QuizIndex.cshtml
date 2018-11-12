@@ -1,0 +1,51 @@
+﻿@model IEnumerable<VikingNotes.Models.Quiz>
+    
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<ul class="quizs  verOffset7">
+    @foreach (var quiz in Model)
+    {
+        @*<li> @quiz.Creation - @quiz.Author.UserName </li>*@
+        
+        <li>
+            <div class="date">
+                <div class="month">@quiz.Creation.ToString("MMM")</div>
+                <div class="day">@quiz.Creation.ToString("d ")</div>
+            </div>
+            
+            <div class="details">
+                <div class="author">@quiz.Author.Name</div>
+                <div class="genre">@quiz.Genre.Name</div>
+            </div>
+        </li>
+    }
+</ul>
+
+
+<dt>
+    @Html.DisplayNameFor(model => model.Ratings)
+</dt>
+
+
+<dd>
+    <!-- does not recognize the @@model.Name is @@model.overallRating -->
+    @*@{
+    if(Model.Ratings.count > 0){ <p> Overall Rating for @Model. is @Model.OverallRating</p>}
+        else { <p>Rates for @Model.Name</p>}
+    }*@
+    
+        @{using (Html.BeginForm("SetRating", "Quizs"))
+          {
+                @*@Html.HiddenFor(x =>x.Id)*@
+              for (int i = 0; i < 10; i++)
+              {
+                  <input type="radio" id="Rank" name="Rank" value="@i"/>
+                  @i
+              }
+              <input type="submit" value="submit"/>
+          }
+        }
+    </dd>

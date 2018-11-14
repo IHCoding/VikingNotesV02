@@ -50,10 +50,10 @@ namespace VikingNotes.Controllers
         }
 
 
-        public PartialViewResult RatingControl(string quizId)
+        public PartialViewResult RatingControl(int Id)
         {
-            var viewModel = _context.Guizzes.Find(quizId);
-            return PartialView("_RatingControl", viewModel);;
+            var viewModel = _context.Guizzes.Find(Id);
+            return PartialView("RatingControl", viewModel);;
         }
 
 

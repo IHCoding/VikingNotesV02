@@ -4,25 +4,24 @@
     ViewBag.Title = "_RatingControl";
 }
 
-<h2>_RatingControl</h2>
-
-
 <dd>
    
     @{
-    if(Model.Ratings.Count > 0){ <p> Overall Rating for @Model. is @Model.OverallRating</p>}
+    if(Model.Ratings.Count > 0){ <p> Overall Rating for @Model.Id is @Model.OverallRating</p>}
         else { <p>Rates for @Model.Id</p>}
     }
+    <input type="submit" value="submit"/>
+
     
-    @{using (Html.BeginForm("SetRating", "Quizs"))
+    @*@{using (Html.BeginForm("SetRating", "Quizs"))
       {
                 @Html.HiddenFor(x =>x.Id)
-          for (int i = 0; i < 10; i++)
+          for (int i = 0; i < 5; i++)
           {
               <input type="radio" id="Rank" name="Rank" value="@i"/>
               @i
           }
-          <input type="submit" value="submit"/>
+         
       }
-    }
+    }*@
 </dd>

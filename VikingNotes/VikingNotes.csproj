@@ -289,15 +289,13 @@
     <Content Include="Image\semester8.png" />
     <Content Include="Image\semester9.png" />
     <Content Include="Image\VikingNotesLogo.png" />
-    <Content Include="IndexStylesheet.css" />
-    <Content Include="Rating.html" />
+    <Content Include="_testRating.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Project.Process.Documentation" />
-    <Content Include="Views\Rating\Rating.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -309,7 +307,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -346,7 +346,7 @@
     <Content Include="Views\Quizs\QuizForm.cshtml" />
     <Content Include="Views\Home\QuizIndex.cshtml" />
     <Content Include="Views\Quizs\MyQuiz.cshtml" />
-    <Content Include="Views\Quizs\_RatingControl.cshtml" />
+    <Content Include="Views\Quizs\RatingControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

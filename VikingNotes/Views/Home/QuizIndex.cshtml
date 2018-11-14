@@ -20,29 +20,33 @@
                 <div class="author">@quiz.Author.Name</div>
                 <div class="genre">@quiz.Genre.Name</div>
             </div>
+            
+            
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.Ratings)
+            </dt>
+
+
+            <dd id="RatingsControl">
+                @{Html.RenderAction("RatingControl", "Quizs", new { id = quiz.Id }); }
+            </dd>
+
+
+            @{
+                for (int i = 0; i < 5; i++)
+                {
+                    <a href="#" name="Rank" data-rank="@i" data-quizId="@quiz.Id">
+                        <i class="glyphicon glyphicon-star@(quiz.OverallRating < i ? "-empty" : "")"></i>
+                    </a>
+                }
+            }
+
         </li>
+
     }
 </ul>
 
-
-<dt>
-    @Html.DisplayNameFor(model => model.Ratings)
-</dt>
-
-
-<dd id="RatingsControl">
-    @{Html.RenderAction("RatingControl", "Quizs", new { id = Model.Id }); }
-</dd>
-
-
-@{
-    for (int i = 0; i < 10; i++)
-    {
-        <a href="#" name="Rank" data-rank="@i" data-quizId="@Model.Id">
-            <i class="glyphicon glyphicon-star@(Model.OverallRating < i ? "-empty" : "")"></i>
-        </a>
-    }
-}
 
 
 
@@ -95,26 +99,3 @@
 
 
 
-
-
-
-
-@*<dd>*@
-    <!-- does not recognize the @@model.Name is @@model.overallRating -->
-    @*@{
-    if(Model.Ratings.Count > 0){ <p> Overall Rating for @Model. is @Model.OverallRating</p>}
-        else { <p>Rates for @Model.Name</p>}
-    }*@
-    
-        @*@{using (Html.BeginForm("SetRating", "Quizs"))*@
-          {
-                @*@Html.HiddenFor(x =>x.Id)*@
-              @*for (int i = 0; i < 10; i++)
-              {
-                  <input type="radio" id="Rank" name="Rank" value="@i"/>
-                  @i
-              }
-              <input type="submit" value="submit"/>*@
-          }
-        }
-    @*</dd>*@

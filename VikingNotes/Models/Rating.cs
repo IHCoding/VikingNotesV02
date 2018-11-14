@@ -42,7 +42,7 @@ namespace VikingNotes.Models
 
 
 
-        [Range(0, 9)]
+        [Range(0, 5)]
         [Display(Name = "Rank")]
         public decimal Rank { get; set; }
     }

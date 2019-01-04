@@ -47,8 +47,8 @@ namespace VikingNotes.Views.ViewModel
 
                 Expression<Func<QuizsController, ActionResult>> create =
                     (c => c.Create(this));
-
-                var action = (Id != 0) ? update : create; // action variable is expression: depending on the value of the id, select one of the expressions and get the method name at run time
+                // action variable is expression: depending on the value of the id, select one of the expressions and get the method name at run time
+                var action = (Id != 0) ? update : create; 
                 var actionName = (action.Body as MethodCallExpression).Method.Name; // with the above expression extracting the method name at run time.
 
                 return actionName;

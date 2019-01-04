@@ -1,27 +1,40 @@
-﻿@model VikingNotes.Models.Quiz
+﻿@using VikingNotes.Models
+@model VikingNotes.Models.Quiz
 
 @{
     ViewBag.Title = "_RatingControl";
 }
 
-<dd>
-   
-    @{
-    if(Model.Ratings.Count > 0){ <p> Overall Rating for @Model.Id is @Model.OverallRating</p>}
-        else { <p>Rates for @Model.Id</p>}
-    }
-    <input type="submit" value="submit"/>
 
+<dd>
+    @{
+        if (Model.Ratings.Count > 0)
+            { <p> Overall Rating for @Model.Title is @Model.OverallRating</p> }
+        else
+            { <p>Rate for @Model.Id</p>}
+    }
     
+    @{
+        for (int i = 0; i < 5; i++)
+        {
+            <a href="#" name="Rank" data-rank="@i" data-quizId="@Model.Id">
+                <i class="glyphicon glyphicon-star@(Model.OverallRating < i ? "-empty" : "")"></i>
+            </a>
+        }
+        @*<input type="submit" value="submit" />*@
+    }
+    
+
     @*@{using (Html.BeginForm("SetRating", "Quizs"))
-      {
-                @Html.HiddenFor(x =>x.Id)
-          for (int i = 0; i < 5; i++)
-          {
-              <input type="radio" id="Rank" name="Rank" value="@i"/>
-              @i
-          }
-         
-      }
+        {
+            @Html.HiddenFor(x => x.Id)
+            for (int i = 0; i < 5; i++)
+            {
+                <input type="radio" id="Rank" name="Rank" value="@i" />
+                @i
+            }
+            <input type="submit" value="submit" />
+        }
     }*@
+
 </dd>

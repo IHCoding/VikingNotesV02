@@ -4,7 +4,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
 <ul class="quizs  verOffset7">
     @foreach (var quiz in Model)
     {
@@ -22,33 +21,18 @@
             </div>
             
             
-            
+            <div>
             <dt>
                 @Html.DisplayNameFor(model => model.Ratings)
             </dt>
-
-
+                
             <dd id="RatingsControl">
-                @{Html.RenderAction("RatingControl", "Quizs", new { id = quiz.Id }); }
+                @{Html.RenderAction("RatingControl", "Quizs", new { Id = quiz.Id }); }
             </dd>
-
-
-            @{
-                for (int i = 0; i < 5; i++)
-                {
-                    <a href="#" name="Rank" data-rank="@i" data-quizId="@quiz.Id">
-                        <i class="glyphicon glyphicon-star@(quiz.OverallRating < i ? "-empty" : "")"></i>
-                    </a>
-                }
-            }
-
+            </div>
         </li>
-
     }
 </ul>
-
-
-
 
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
@@ -88,9 +72,7 @@
 
                 .fail ( function (jqxhr, status, error) {
                 });
-
         }
-
         $(document).ready(SetRatingControlCallbacks);
     </script>
 }

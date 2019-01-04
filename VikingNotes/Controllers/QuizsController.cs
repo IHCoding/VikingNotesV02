@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
-using Microsoft.ApplicationInsights.Web;
 using Microsoft.AspNet.Identity;
 using VikingNotes.Models;
 using VikingNotes.Views.ViewModel;
@@ -24,15 +19,12 @@ namespace VikingNotes.Controllers
             _context = new ApplicationDbContext();
         }
 
-
-
-
         [Authorize]
-        public Rating SetRating(int quizId, decimal rank)
+        public ActionResult SetRating(int Id, decimal rank)
         {
             var rating = new Rating();
             rating.Rank = rank;
-            rating.Id = quizId;
+            rating.Id = Id;
             rating.UserId = User.Identity.GetUserId();
 
             _context.Ratings.Add(rating);
@@ -45,10 +37,9 @@ namespace VikingNotes.Controllers
                 .Include(x => x.User)
                 .SingleOrDefault(x => x.RatingId == rating.RatingId);
 
-            return (rating);
-            //return RedirectToAction("QuizIndex", "Home", new { id = quizId });
+            //return (rating);
+            return RedirectToAction("QuizIndex", "Home", new { id = Id });
         }
-
 
         public PartialViewResult RatingControl(int Id)
         {
@@ -96,6 +87,8 @@ namespace VikingNotes.Controllers
         [ValidateAntiForgeryToken] // step 22b: 
         public ActionResult Create(QuizFormViewModel viewModel) // takes parameter of QuizFormViewModel -- the model behind the view. When posting the form will result this action
         {
+            /* check if the model is valid. if not return the same view.
+    	       otherwise, redirect the user to the home page. */
             if (!ModelState.IsValid)
             {
                 viewModel.Genres = _context.Genres.ToList();
@@ -150,13 +143,12 @@ namespace VikingNotes.Controllers
                 Title = quiz.Title,
                 Description = quiz.Description
             };
-            return View("QuizForm", viewModel); // the vire "Create", already exist that renders to capture the view. reusing it.
+            return View("QuizForm", viewModel); // the view "Create", already exist that renders to capture the view. reusing it.
         }
         #endregion
 
         #region Updaet a Quiz
-        [Authorize, HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize, HttpPost, ValidateAntiForgeryToken]
         public ActionResult Update(QuizFormViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -167,7 +159,7 @@ namespace VikingNotes.Controllers
 
             var userId = User.Identity.GetUserId();
 
-            // pulling out hte existing quiz and modifying it's property
+            // pulling out the existing quiz and modifying its property
             var quiz = _context.Guizzes.Single(m => m.Id == viewModel.Id && m.AuthorId == userId);
 
             // modifying / updating the quiz

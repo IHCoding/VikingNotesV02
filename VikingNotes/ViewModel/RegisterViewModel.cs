@@ -20,7 +20,7 @@ namespace VikingNotes.ViewModel
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        // step 31b
+        // step 31b: added additional property to the registration form
         [Required, StringLength(100)]
         public string Name { get; set; }
     }

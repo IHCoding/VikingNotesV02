@@ -13,7 +13,7 @@ namespace VikingNotes.Models
         public int Id { get; set; } // unique id
 
         // assoiciating the user with the AplicationUser class that represents the VikingNotes
-        //[Required] // step 7b: Overriding convention
+        //[Required] // step 7b: Overwriting convention
         public ApplicationUser Author { get; set; } // Who is performing it
 
         [Required] // step 14: moved from the Author to FK, making sure the FK is set to this, not Author.

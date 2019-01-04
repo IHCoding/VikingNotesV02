@@ -10,10 +10,8 @@ namespace VikingNotes.Models
         public DbSet<Genre> Genres { get; set; } // step 4
         public DbSet<Rating> Ratings { get; set; }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
             //modelBuilder.Ignore<IdentityUserLogin>();
             //modelBuilder.Ignore<IdentityUserRole>();
             //modelBuilder.Ignore<IdentityUserClaim>();
@@ -33,8 +31,6 @@ namespace VikingNotes.Models
             base.OnModelCreating(modelBuilder);
         }
 
-
-
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -44,6 +40,5 @@ namespace VikingNotes.Models
         {
             return new ApplicationDbContext();
         }
-
     }
 }

@@ -152,7 +152,7 @@ namespace VikingNotes.Controllers
         {
             if (ModelState.IsValid)
             {
-                // step 31d: 
+                // step 31d: added name
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
